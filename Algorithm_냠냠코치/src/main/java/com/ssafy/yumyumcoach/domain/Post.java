@@ -1,0 +1,4 @@
+package com.ssafy.yumyumcoach.domain;
+
+import java.time.LocalDateTime;
+public class Post { private long id; private String authorId; private String board; private String title; private String content; private LocalDateTime createdAt=LocalDateTime.now(); public Post(long id,String a,String b,String t,String c){this.id=id;authorId=a;board=b;title=t;content=c;} public long getId(){return id;} public String getAuthorId(){return authorId;} public String getBoard(){return board;} public String getTitle(){return title;} public String getContent(){return content;} public LocalDateTime getCreatedAt(){return createdAt;} public void update(String t,String c){title=t;content=c;} @Override public String toString(){return "#%d [%s] %s - %s (%s)".formatted(id,board,title,authorId,createdAt.toLocalDate());}}

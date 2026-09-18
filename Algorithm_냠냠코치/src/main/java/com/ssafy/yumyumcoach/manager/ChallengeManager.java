@@ -1,0 +1,7 @@
+package com.ssafy.yumyumcoach.manager;
+
+import com.ssafy.yumyumcoach.domain.*;
+import com.ssafy.yumyumcoach.repository.DataRepository;
+import java.time.LocalDate;
+import java.util.*;
+public class ChallengeManager { private final DataRepository repo; public ChallengeManager(DataRepository r){repo=r;} public List<Challenge> list(){return List.copyOf(repo.challenges());} public Challenge create(String t,String d,LocalDate s,LocalDate e,String image){if(e.isBefore(s))throw new IllegalArgumentException("종료일은 시작일 이후여야 합니다.");Challenge c=new Challenge(repo.nextChallengeId(),t,d,s,e,image);repo.challenges().add(c);repo.save();return c;} public void delete(long id){repo.challenges().removeIf(c->c.id()==id);repo.participations().removeIf(p->p.getChallengeId()==id);repo.save();} public ChallengeParticipation join(long id,String user){if(repo.challenges().stream().noneMatch(c->c.id()==id))throw new IllegalArgumentException("챌린지가 없습니다.");return repo.participations().stream().filter(p->p.getChallengeId()==id&&p.getUserId().equals(user)).findFirst().orElseGet(()->{ChallengeParticipation p=new ChallengeParticipation(id,user);repo.participations().add(p);repo.save();return p;});} public void progress(long id,String user,int value){ChallengeParticipation p=join(id,user);p.setProgress(value);repo.save();} public List<ChallengeParticipation> mine(String user){return repo.participations().stream().filter(p->p.getUserId().equals(user)).toList();} }

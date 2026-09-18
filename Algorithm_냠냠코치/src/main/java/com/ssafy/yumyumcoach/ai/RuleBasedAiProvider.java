@@ -1,0 +1,5 @@
+package com.ssafy.yumyumcoach.ai;
+
+import com.ssafy.yumyumcoach.domain.*;
+import java.util.List;
+public class RuleBasedAiProvider implements GenerativeAiProvider { public String name(){return "규칙 기반 오프라인 코치";} public boolean external(){return false;} public String analyzeMeal(User u,Meal m,AnalysisResult r){String focus=r.sodium()>700?"다음 끼니는 국물과 소스를 줄이고 채소·과일을 곁들이세요.":r.protein()<20?"두부, 달걀, 닭가슴살 중 하나를 추가하면 단백질 균형이 좋아집니다.":"현재 구성을 유지하되 다양한 색의 채소를 더해 미량영양소를 보완하세요.";return "[%s] %s님의 %s 식단은 %d점입니다. %s %s".formatted(name(),u.getName(),m.getMealType(),r.score(),r.advice(),focus);} public String exerciseCoach(User u,List<Meal> meals){double avg=meals.stream().mapToDouble(Meal::calories).average().orElse(u.targetCalories()/3);String intensity=u.bmi()>=25?"빠르게 걷기 30분 + 전신 근력 15분":"중강도 유산소 25분 + 스쿼트·푸시업 각 3세트";if(u.getGoal().contains("근력"))intensity="스쿼트·푸시업·로우 중심 근력운동 40분, 이후 가벼운 걷기 10분";return "[%s] BMI %.1f, 기록 식단 평균 %.0fkcal 기준: %s. 질환이 있거나 통증이 생기면 전문가와 상담하고 강도를 낮추세요.".formatted(name(),u.bmi(),avg,intensity);} }

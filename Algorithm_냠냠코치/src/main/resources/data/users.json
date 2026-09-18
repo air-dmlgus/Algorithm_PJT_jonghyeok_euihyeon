@@ -1,0 +1,4 @@
+[
+  {"id":"demo","password":"demo1234","name":"김건강","age":28,"gender":"남","heightCm":175.0,"weightKg":70.0,"disease":"없음","goal":"체중 유지","active":true,"following":["coach"]},
+  {"id":"coach","password":"coach1234","name":"이코치","age":34,"gender":"여","heightCm":165.0,"weightKg":57.0,"disease":"없음","goal":"근력 향상","active":true,"following":[]}
+]

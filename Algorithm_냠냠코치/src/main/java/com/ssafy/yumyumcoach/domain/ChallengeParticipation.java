@@ -1,0 +1,2 @@
+package com.ssafy.yumyumcoach.domain;
+public class ChallengeParticipation { private long challengeId; private String userId; private int progress; public ChallengeParticipation(long c,String u){challengeId=c;userId=u;} public long getChallengeId(){return challengeId;} public String getUserId(){return userId;} public int getProgress(){return progress;} public void setProgress(int p){progress=Math.max(0,Math.min(100,p));} }

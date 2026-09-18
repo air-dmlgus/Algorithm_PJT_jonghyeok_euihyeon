@@ -1,0 +1,7 @@
+{
+  "meals": [],
+  "challenges": [{"id":1,"title":"30일 물 마시기","description":"매일 물 2L 마시기","startDate":"2026-09-01","endDate":"2026-09-30","imageUrl":"water.png"}],
+  "participations": [],
+  "posts": [],
+  "comments": []
+}
